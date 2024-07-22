@@ -2,11 +2,16 @@
     import {onMount} from "svelte";
     import {serverURL} from "../../enviroment.js";
     import './editProfile.css';
-    import {carFetcher, userFetcher} from "../../lib/fetchers";
-    import type {Car} from "$lib/Types";
+    import type {Car, User} from "$lib/Types";
     import {user} from '../CurrentUser'
 
+    export let data: {cars: Car[], user: User}
+
+    $user = data.user;
     let cars: Car[] = [];
+    if (data.cars && data.cars.length > 0) {
+        cars = [...data.cars];
+    }
 
     async function removeCar(id: number): Promise<void> {
         await fetch(`${serverURL}/api/cars/${id}`, {
@@ -17,19 +22,6 @@
         $user = {...$user};
     }
 
-    async function main() {
-        let BackButton = window.Telegram.WebApp.BackButton;
-        BackButton.show();
-        BackButton.onClick(function () {
-            window.history.back();
-            BackButton.hide();
-        });
-        $user = await userFetcher();
-        if ($user.car_ids) {
-            await carFetcher(cars, $user);
-            cars = [...cars];
-        }
-    }
 
     async function submit() {
         let response = await fetch(`${serverURL}/api/users`, {
@@ -40,14 +32,22 @@
             body: JSON.stringify($user)
         })
         if (response.ok) {
-            $user = $user;
+            $user = {...$user};
             window.history.back();
         } else {
             window.Telegram.WebApp.showAlert("Something went wrong!");
         }
     }
 
-    onMount(main);
+
+    onMount(()=>{
+        let BackButton = window.Telegram.WebApp.BackButton;
+        BackButton.show();
+        BackButton.onClick(function () {
+            window.history.back();
+            BackButton.hide();
+        });
+    });
 </script>
 
 <div class="container">

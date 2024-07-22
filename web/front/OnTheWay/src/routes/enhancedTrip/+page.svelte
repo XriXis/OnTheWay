@@ -3,40 +3,28 @@
     import {Trip} from "$lib/Types";
     import "./enhancedTrip.css"
     import {serverURL} from "../../enviroment";
+    import {formatDate} from "$lib/formatDate";
 
-    function formatDate(date: Date): string {
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const year = date.getFullYear();
-        return `${day}-${month}-${year}`;
+    export let data: { trip: Trip };
+
+    let trip: Trip = data.trip;
+    console.log(trip);
+    let sex: string;
+    let photo: string = `${serverURL}/api/users/${trip.driver.id}/photo`;
+    if (trip.driver.sex) {
+        sex = "Женский";
+    } else {
+        sex = "Мужской";
     }
 
-
-    let trip: Trip;
-    let sex: string;
-    let photo: string;
-
-    async function main() {
+    onMount(() => {
         let BackButton = window.Telegram.WebApp.BackButton;
         BackButton.show();
         BackButton.onClick(function () {
             window.history.back();
             BackButton.hide();
         });
-        let trip_id = window.location.href.split('?')[1];
-        trip = await (await fetch(serverURL + "/api/trips/" + trip_id, {
-            method: "GET",
-        })).json();
-        console.log(trip);
-        if (trip.driver.sex) {
-            sex = "Женский";
-        } else {
-            sex= "Мужской";
-        }
-        photo = `${serverURL}/api/users/${trip.driver.id}/photo`;
-    }
-
-    onMount(main);
+    });
 </script>
 {#if trip}
     <p id="name">{trip.driver.name}</p>
@@ -67,19 +55,19 @@
     <div class="options">
         <div id="pets">
             <a>Животные<br></a>
-            <a id="z1">{trip.allow_pets?'✔️':'✖️'}</a>
+            <a id="z1">{trip.allow_pets ? '✔️' : '✖️'}</a>
         </div>
         <div id="kids">
             <a>Детское кресло<br></a>
-            <a id="z2">{trip.has_child_seat?'✔️':'✖️'}</a>
+            <a id="z2">{trip.has_child_seat ? '✔️' : '✖️'}</a>
         </div>
         <div id="minikids">
             <a>Бустер<br></a>
-            <a id="z3">{trip.has_buster?'✔️':'✖️'}</a>
+            <a id="z3">{trip.has_buster ? '✔️' : '✖️'}</a>
         </div>
         <div id="bag">
             <a>Багаж<br></a>
-            <a id="z4">{trip.allow_luggage?'✔️':'✖️'}</a>
+            <a id="z4">{trip.allow_luggage ? '✔️' : '✖️'}</a>
         </div>
     </div>
     <div id="car">

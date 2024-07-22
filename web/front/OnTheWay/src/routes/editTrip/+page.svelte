@@ -1,19 +1,12 @@
 <script lang="ts">
-    import {onMount} from "svelte";
     import {Trip} from "$lib/Types";
     import {serverURL} from "../../enviroment";
     import "./editTrip.css"
-    import {user} from "../CurrentUser";
 
-    let trip: Trip;
+    export let data: {trip: Trip};
 
-    async function main() {
-        let href = document.location.href;
-        let id = href.split("?")[1].split("#")[0];
-        trip = await (await fetch(serverURL + "/api/trips/" + id, {
-            method: "GET",
-        })).json();
-    }
+    let trip: Trip = data.trip;
+
     async function submit() {
         let cond1 = trip.start_location.toLowerCase() != "иннополис" && trip.start_location.toLowerCase() != "казань";
         let cond2 = trip.end_location.toLowerCase() != "иннополис" && trip.end_location.toLowerCase() != "казань"
@@ -59,7 +52,6 @@
         window.Telegram.WebApp.close();
     }
 
-    onMount(main);
 </script>
 {#if trip && trip.detail !== "Trip not found"}
     <div class="grey-rect">

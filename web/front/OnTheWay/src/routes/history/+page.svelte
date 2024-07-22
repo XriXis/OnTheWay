@@ -5,27 +5,23 @@
     import {onMount} from "svelte";
     import DivisionHeader from "$lib/DivisionHeader.svelte";
 
-    let ownTrips: Trip[] = [];
-    let participatedTrips: Trip[] = [];
+    export let data: {ownTrips: Trip[], participatedTrips: Trip[]}
+
+    let ownTrips: Trip[] = data.ownTrips;
+    let participatedTrips: Trip[] = data.participatedTrips;
+    let tripsToShow: Trip[] = [...ownTrips];
     let type: boolean = true;
+    $: name_color = type ? "#fbea50ab" : "#d0cecee6";
+
     onMount(async () => {
-            ownTrips = await (await fetch(`${serverURL}/api/finished/driver/${window.Telegram.WebApp.initDataUnsafe.user.id}`, {
-                method: "GET",
-            })).json();
-            participatedTrips = await (await fetch(`${serverURL}/api/finished/rider/${window.Telegram.WebApp.initDataUnsafe.user.id}`, {
-                method: "GET"
-            })).json();
             let BackButton = window.Telegram.WebApp.BackButton;
             BackButton.show();
             BackButton.onClick(function () {
                 window.history.back();
                 BackButton.hide();
             });
-            tripsToShow = [...ownTrips]
         }
     );
-    let tripsToShow: Trip[] = [];
-    $: name_color = type ? "#fbea50ab" : "#d0cecee6";
 </script>
 <br><br><br>
 {#key type}
