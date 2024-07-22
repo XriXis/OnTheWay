@@ -2,6 +2,7 @@
     import type {Trip} from "./Types";
     import {serverURL} from "../enviroment";
     import './assets/TripCard.css';
+    import {onMount} from "svelte";
 
     export let trip: Trip;
     export let appliedTrips: number[];
@@ -12,12 +13,13 @@
         const year = date.getFullYear();
         return `${day}-${month}-${year}`;
     }
-
-    let isApproved: boolean =
-        trip.passengers
-            .map(passenger => passenger.id)
-            .includes(window.Telegram.WebApp.initDataUnsafe.user.id as number);
-
+    let isApproved: boolean;
+    onMount(()=> {
+        isApproved =
+            trip.passengers
+                .map(passenger => passenger.id)
+                .includes(window.Telegram.WebApp.initDataUnsafe.user.id as number);
+    })
     // 0 - can apply
     // 1 - await for submission
     // 2 - participate
