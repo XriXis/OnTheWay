@@ -1,5 +1,5 @@
 import {writable, Writable} from "svelte/store";
-import {NewTrip, Passenger, CarType} from "../../lib/Types";
+import {NewTrip, Passenger, CarType, Car, User} from "../../lib/Types";
 
 export const activeButton = writable("");
 
@@ -37,6 +37,9 @@ export let tripData: NewTrip = {
     add_info: null,
     price: 100,
 };
+
+export let fetchedCars: Writable<Car[]>;
+export let fetchedUser: Writable<User>;
 
 export let carType: CarType = {
     carType: "",

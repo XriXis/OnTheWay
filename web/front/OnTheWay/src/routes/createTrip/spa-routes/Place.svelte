@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {url} from "../../../enviroment";
+    import {serverURL} from "../../../enviroment";
     import {tripData, step, activeButton} from "../Common";
     function validate(): boolean {
         if (tripData.start_location == "") {
@@ -19,7 +19,7 @@
         {:else}
             <p class="dir-desc">Куда</p>
         {/if}
-        <img src="{url}/static/icons/location-pin-alt-svgrepo-com.svg"
+        <img src="{serverURL}/static/icons/location-pin-alt-svgrepo-com.svg"
              class="dir-image"
              alt="Location Pin"
         />

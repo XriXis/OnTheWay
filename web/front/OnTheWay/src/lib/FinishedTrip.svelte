@@ -1,6 +1,6 @@
 <script lang="ts">
     import type {Trip} from "./Types";
-    import {url} from "../enviroment";
+    import {serverURL} from "../enviroment";
     import './assets/FinishedTrip.css';
 
     export let trip: Trip;
@@ -16,7 +16,7 @@
 <div class="finished_trips">
     <div class="card">
         <div class="verh">
-            <img class="avatar" alt="driver-avatar" src="{url}/api/users/{trip.driver.id}/photo">
+            <img class="avatar" alt="driver-avatar" src="{serverURL}/api/users/{trip.driver.id}/photo">
             <div class="verhtext">
                 <p class="owner_name">{trip.driver.name}</p>
                 <div class="main-info">

@@ -1,6 +1,6 @@
 <script lang="ts">
     import {onMount} from "svelte";
-    import {url} from "../../enviroment.js";
+    import {serverURL} from "../../enviroment.js";
     import './editProfile.css';
     import {carFetcher, userFetcher} from "../../lib/fetchers";
     import type {Car} from "$lib/Types";
@@ -9,7 +9,7 @@
     let cars: Car[] = [];
 
     async function removeCar(id: number): Promise<void> {
-        await fetch(`${url}/api/cars/${id}`, {
+        await fetch(`${serverURL}/api/cars/${id}`, {
             method: "DELETE"
         })
         cars = [...cars.filter(car => car.id !== id)]
@@ -32,7 +32,7 @@
     }
 
     async function submit() {
-        let response = await fetch(`${url}/api/users`, {
+        let response = await fetch(`${serverURL}/api/users`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

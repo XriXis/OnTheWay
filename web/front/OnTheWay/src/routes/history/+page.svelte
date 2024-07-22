@@ -1,6 +1,6 @@
 <script lang="ts">
     import FinishedTrip from "$lib/FinishedTrip.svelte";
-    import {url} from "../../enviroment";
+    import {serverURL} from "../../enviroment";
     import type {Trip} from "$lib/Types";
     import {onMount} from "svelte";
     import DivisionHeader from "$lib/DivisionHeader.svelte";
@@ -9,10 +9,10 @@
     let participatedTrips: Trip[] = [];
     let type: boolean = true;
     onMount(async () => {
-            ownTrips = await (await fetch(`${url}/api/finished/driver/${window.Telegram.WebApp.initDataUnsafe.user.id}`, {
+            ownTrips = await (await fetch(`${serverURL}/api/finished/driver/${window.Telegram.WebApp.initDataUnsafe.user.id}`, {
                 method: "GET",
             })).json();
-            participatedTrips = await (await fetch(`${url}/api/finished/rider/${window.Telegram.WebApp.initDataUnsafe.user.id}`, {
+            participatedTrips = await (await fetch(`${serverURL}/api/finished/rider/${window.Telegram.WebApp.initDataUnsafe.user.id}`, {
                 method: "GET"
             })).json();
             let BackButton = window.Telegram.WebApp.BackButton;

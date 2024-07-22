@@ -1,6 +1,6 @@
 import type {Load} from '@sveltejs/kit';
 import {Car, Trip} from "../../lib/Types";
-import {url} from "../../enviroment";
+import {serverURL} from "../../enviroment";
 import {carFetcher, userFetcher} from "../../lib/fetchers";
 
 export const load: Load = async ({fetch, url}: {
@@ -13,6 +13,7 @@ export const load: Load = async ({fetch, url}: {
     await carFetcher(cars_, user);
     const cars: Car[] = [...cars_]
     return {
-        cars
+        cars,
+        user,
     }
 }

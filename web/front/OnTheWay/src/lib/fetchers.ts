@@ -1,5 +1,5 @@
 import type {Car, User} from "./Types";
-import {url} from "../enviroment";
+import {serverURL} from "../enviroment";
 
 export async function carFetcher(destination: Car[], user: User): Promise<void> {
     if (!user) {
@@ -9,12 +9,12 @@ export async function carFetcher(destination: Car[], user: User): Promise<void> 
         return ;
     }
     for (const id of user.car_ids) {
-        destination.push(await (await fetch(url + "/api/cars/" + id, {})).json());
+        destination.push(await (await fetch(serverURL + "/api/cars/" + id, {})).json());
     }
 }
 
 export async function userFetcher(id: number): Promise<User> {
-    return await (await fetch(url + "/api/users/" + id, {
+    return await (await fetch(serverURL + "/api/users/" + id, {
         method: "GET",
     })).json();
 }

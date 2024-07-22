@@ -8,11 +8,11 @@
     import Cars from "./spa-routes/Cars.svelte";
     import Form from "./spa-routes/Form.svelte";
     import "./createTrip.css";
-    import {tripData, step} from "./Common";
-    import {Car} from "$lib/Types";
+    import {tripData, step, fetchedCars} from "./Common";
+    import {Car, User} from "$lib/Types";
+    import {user} from "../CurrentUser";
 
-    export let data: { cars: Car[] }
-    const cars = data.cars;
+    export let data: { cars: Car[], user: User }
     const order = [
         Choice,
         Place,
@@ -27,6 +27,11 @@
     onMount(() => {
         window.Telegram.WebApp.expand();
     })
+
+    $fetchedCars = data.cars;
+    $user = data.user;
+    tripData.driver_id = $user.id;
+
 </script>
 
 <div id="content-wrap">

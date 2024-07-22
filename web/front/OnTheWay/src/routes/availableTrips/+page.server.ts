@@ -1,6 +1,6 @@
 import type {Load} from '@sveltejs/kit';
 import {Trip} from "../../lib/Types";
-import {url} from "../../enviroment";
+import {serverURL} from "../../enviroment";
 
 async function filterTripsSideEffect(trips: Trip[]): Promise<Trip[]> {
     let hrs = Number(new Date().toLocaleTimeString().split(':')[0]);
@@ -17,7 +17,7 @@ async function filterTripsSideEffect(trips: Trip[]): Promise<Trip[]> {
             let cond1 = day > tripday && mon == tripmon || mon > tripmon;
             let cond2 = day == tripday && mon == tripmon && (hrs > tripHrs || min > tripmin && hrs == tripHrs);
             if (cond1 || cond2) {
-                await fetch(`${url}/api/trips/` + trip.id, {
+                await fetch(`${serverURL}/api/trips/` + trip.id, {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json"
@@ -38,13 +38,13 @@ export const load: Load = async ({fetch, url}: {
     url: URL
 }) => {
     const userId = url.searchParams.get("userId");
-    const trips_: Trip[] = await (await fetch(url + "/api/trips", {
+    const trips_: Trip[] = await (await fetch(serverURL + "/api/trips", {
         method: "GET",
     })).json();
     const trips = await filterTripsSideEffect(trips_);
     const driversTrips = trips.filter((trip: Trip) => !trip.is_request);
     const ridersTrips = trips.filter((trip: Trip) => trip.is_request);
-    const appliedTrips = await (await fetch(`${url}/api/trips/awaited/${userId}`, {
+    const appliedTrips = await (await fetch(`${serverURL}/api/trips/awaited/${userId}`, {
         method: "GET",
     })).json();
 

@@ -1,6 +1,6 @@
 <script lang="ts">
     import {onMount} from "svelte";
-    import {url} from "../../enviroment.js";
+    import {serverURL} from "../../enviroment.js";
     import type {Car} from "$lib/Types";
     import AddCar from "$lib/AddCar.svelte";
     import './profile.css';
@@ -12,7 +12,7 @@
     let cars: Car[] = [];
 
     onMount(async () => {
-        userUrl = url + "/api/users/" + window.Telegram.WebApp.initDataUnsafe.user.id;
+        userUrl = serverURL + "/api/users/" + window.Telegram.WebApp.initDataUnsafe.user.id;
         window.Telegram.WebApp.expand();
         $user = await userFetcher();
         if ($user.car_ids) {
@@ -41,7 +41,7 @@
             <p id="rides">Поездок: {$user.rides_amount}</p>
         </div>
         <div class="PhotoCar">
-            <img id="carPhoto" src="{url}/static/icons/image-22.svg" alt="section-icon">
+            <img id="carPhoto" src="{serverURL}/static/icons/image-22.svg" alt="section-icon">
         </div>
         <div id="cars">
             <p id="MyCars">Мои машины:</p>

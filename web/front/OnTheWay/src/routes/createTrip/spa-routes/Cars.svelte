@@ -1,20 +1,16 @@
 <script lang="ts">
-    import {url} from "../../../enviroment";
+    import {serverURL} from "../../../enviroment";
     import AddCar from "$lib/AddCar.svelte";
-    import {data, step} from "../Common";
+    import {tripData, step, fetchedCars} from "../Common";
     import {Car} from "$lib/Types";
     import {onMount} from "svelte";
     import {carFetcher, userFetcher} from "$lib/fetchers";
 
-    let cars: Car[] = [];
-    onMount(async () => {
-        await carFetcher(cars, await userFetcher());
-        cars = [...cars];
-    })
+    let cars: Car[] = [...$fetchedCars];
 
     let currentCar: number;
 
-    $: data.car_id = currentCar ? +currentCar : undefined;
+    $: tripData.car_id = currentCar ? +currentCar : undefined;
 
     function validateCarChoice(): boolean {
         if (!currentCar) {
@@ -25,7 +21,7 @@
     }
 </script>
 
-<img src="{url}/static/images/travel-car-svgrepo-com.svg" class="car-img" alt="little-car">
+<img src="{serverURL}/static/images/travel-car-svgrepo-com.svg" class="car-img" alt="little-car">
 <div class="grey-rect">
     <div class="desc-img">
         <p class="dir-desc">Выберите машину</p>

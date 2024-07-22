@@ -1,7 +1,7 @@
 <script lang="ts">
     import {onMount} from "svelte";
     import {Trip} from "$lib/Types";
-    import {url} from "../../enviroment";
+    import {serverURL} from "../../enviroment";
     import "./editTrip.css"
     import {user} from "../CurrentUser";
 
@@ -10,7 +10,7 @@
     async function main() {
         let href = document.location.href;
         let id = href.split("?")[1].split("#")[0];
-        trip = await (await fetch(url + "/api/trips/" + id, {
+        trip = await (await fetch(serverURL + "/api/trips/" + id, {
             method: "GET",
         })).json();
     }
@@ -32,7 +32,7 @@
                 if (timecond1 || timecond2 || timecond3 || timecond4) {
                     alert("Время введено в неправильном формате.\nВведите время в формате хх:xx-xx:xx");
                 } else {
-                    let response = await fetch(`${url}/api/trips/` + trip.id + `/driver?driverID=` + trip.driver.id, {
+                    let response = await fetch(`${serverURL}/api/trips/` + trip.id + `/driver?driverID=` + trip.driver.id, {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json"
@@ -49,7 +49,7 @@
         }
     }
     async function deleteTrip() {
-        let response = await fetch(`${url}/api/trips/` + trip.id, {
+        let response = await fetch(`${serverURL}/api/trips/` + trip.id, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"

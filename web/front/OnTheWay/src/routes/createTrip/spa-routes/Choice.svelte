@@ -1,6 +1,6 @@
 <script>
     import {tripData, step} from "../Common";
-    import {url} from "../../../enviroment"
+    import {serverURL} from "../../../enviroment"
 </script>
 
 <div class="step0">
@@ -17,6 +17,6 @@
         </button>
     </div>
     <div class="img-cont">
-        <img id="firstimg" src="{url}/static/images/car-svgrepo-com.svg" alt="hzcho">
+        <img id="firstimg" src="{serverURL}/static/images/car-svgrepo-com.svg" alt="hzcho">
     </div>
 </div>

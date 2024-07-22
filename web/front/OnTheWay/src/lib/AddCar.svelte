@@ -2,7 +2,7 @@
     import Modal from "$lib/modal/Modal.svelte";
     import {Car, NewCar} from "$lib/Types";
     import {onMount} from "svelte";
-    import {url} from '../enviroment'
+    import {serverURL} from '../enviroment'
     import './assets/AddCar.css'
 
     let modelOpen: boolean = false;
@@ -29,7 +29,7 @@
             window.Telegram.WebApp.showAlert("Not all data is filled");
             return false;
         }
-        await fetch(url + "/api/cars/", {
+        await fetch(serverURL + "/api/cars/", {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"

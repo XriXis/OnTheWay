@@ -2,7 +2,7 @@
     import {onMount} from "svelte";
     import {Trip} from "$lib/Types";
     import "./enhancedTrip.css"
-    import {url} from "../../enviroment";
+    import {serverURL} from "../../enviroment";
 
     function formatDate(date: Date): string {
         const day = String(date.getDate()).padStart(2, '0');
@@ -24,7 +24,7 @@
             BackButton.hide();
         });
         let trip_id = window.location.href.split('?')[1];
-        trip = await (await fetch(url + "/api/trips/" + trip_id, {
+        trip = await (await fetch(serverURL + "/api/trips/" + trip_id, {
             method: "GET",
         })).json();
         console.log(trip);
@@ -33,7 +33,7 @@
         } else {
             sex= "Мужской";
         }
-        photo = `${url}/api/users/${trip.driver.id}/photo`;
+        photo = `${serverURL}/api/users/${trip.driver.id}/photo`;
     }
 
     onMount(main);

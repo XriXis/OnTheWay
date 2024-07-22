@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {url} from "../enviroment.js";
+    import {serverURL} from "../enviroment.js";
     import Filter from "$lib/Filter.svelte";
     import {Trip} from "$lib/Types";
     import './assets/DivisionHeader.css'
@@ -19,7 +19,7 @@
 <div id="zakrep">
     <Filter bind:tripShowCollection={destinationCollection}>
         <a id="filter">
-            <img id="imgfilter" src="{url}/static/icons/filter-svgrepo-com.svg" alt="filter">
+            <img id="imgfilter" src="{serverURL}/static/icons/filter-svgrepo-com.svg" alt="filter">
             Фильтр
         </a>
     </Filter>

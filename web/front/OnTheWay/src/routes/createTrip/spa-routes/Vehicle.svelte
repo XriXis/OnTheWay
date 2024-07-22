@@ -1,6 +1,6 @@
 <script lang="ts">
     import {tripData, step, carType} from "../Common";
-    import {url} from "../../../enviroment";
+    import {serverURL} from "../../../enviroment";
 
     $: if (carType.carType === "taxi") {
         tripData.car_id = 0;
@@ -11,7 +11,7 @@
     }
 
 </script>
-<img src="{url}/static/images/ruble-svgrepo-com.svg" class="date-img" alt="calendar">
+<img src="{serverURL}/static/images/ruble-svgrepo-com.svg" class="date-img" alt="calendar">
 
     {#if tripData.is_request === false}
         <div class="grey-rect">

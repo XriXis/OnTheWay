@@ -1,21 +1,14 @@
 <script lang="ts">
     import {tripData, step} from "../Common";
-    import {url} from "../../../enviroment";
+    import {serverURL} from "../../../enviroment";
     import {onMount} from "svelte";
-    import {Car} from "$lib/Types";
-    import {carFetcher} from "$lib/fetchers";
-
-    function formatDate(date: Date): string {
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const year = date.getFullYear();
-        return `${day}-${month}-${year}`;
-    }
+    import type {Car} from "$lib/Types";
+    import {formatDate} from "$lib/formatDate";
 
     let car_: Car;
     onMount(async () => {
         if (tripData.car_id) {
-            car_ = await (await fetch(url + "/api/cars/" + tripData.car_id, {})).json();
+            car_ = await (await fetch(serverURL + "/api/cars/" + tripData.car_id, {})).json();
         }
     })
 
@@ -41,7 +34,7 @@
         if (tripData.car_id===undefined){
             tripData.car_id=null;
         }
-        await fetch(url + "/api/trips/", {
+        await fetch(serverURL + "/api/trips/", {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"

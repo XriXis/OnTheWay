@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {url} from '../enviroment'
+    import {serverURL} from '../enviroment'
     import Modal from "$lib/modal/Modal.svelte";
     import {Filter, Trip} from "$lib/Types";
     import "./assets/Filter.css"
@@ -44,7 +44,7 @@
         <div class="filter-header-high">
             <div class="filterBorder">
                 <p id="FilterBorder">
-                    <img id="inner-img-filter" src="{url}/static/icons/filter-svgrepo-com.svg" alt="filter">
+                    <img id="inner-img-filter" src="{serverURL}/static/icons/filter-svgrepo-com.svg" alt="filter">
                     Фильтр
                 </p>
 
@@ -64,7 +64,7 @@
                         on:click={()=>{filter.from = 'Иннополис'}}
                         style="background-color: {filter.from==='Иннополис'? '#969696' : ''}"
                 >
-                    <img src="{url}/static/images/location-pin-alt-svgrepo-com.svg" class="leftIcon" alt="Left Icon">
+                    <img src="{serverURL}/static/images/location-pin-alt-svgrepo-com.svg" class="leftIcon" alt="Left Icon">
                     <br>
                     <span class="leftButtonText">Из Иннополиса</span>
                 </button>
@@ -73,7 +73,7 @@
                         on:click={()=>{filter.from = 'Казань'}}
                         style="background-color: {filter.from==='Казань'? '#969696' : ''}"
                 >
-                    <img src="{url}/static/images/location-xmark-svgrepo-com.svg" class="rightIcon" alt="Right Icon">
+                    <img src="{serverURL}/static/images/location-xmark-svgrepo-com.svg" class="rightIcon" alt="Right Icon">
                     <br>
                     <span class="rightButtonText">Из Казани</span>
                 </button>
@@ -82,7 +82,7 @@
 
             <div class="roundedSection2">
                 <button class="leftButton" style="background-color: {filter.date ? '#969696' : ''}">
-                    <img src="{url}/static/images/date-range-svgrepo-com.svg" class="leftIcon2" alt="Left Icon 2">
+                    <img src="{serverURL}/static/images/date-range-svgrepo-com.svg" class="leftIcon2" alt="Left Icon 2">
                     <br>
                     <span class="leftButtonText2">
                         Дата <br> поездки

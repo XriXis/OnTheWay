@@ -1,6 +1,6 @@
 <script lang="ts">
     import type {Trip} from "./Types";
-    import {url} from "../enviroment";
+    import {serverURL} from "../enviroment";
     import './assets/TripCard.css';
 
     export let trip: Trip;
@@ -27,7 +27,7 @@
         let params: URLSearchParams = new URLSearchParams();
         params.append("riderId", window.Telegram.WebApp.initDataUnsafe.user.id.toString())
         params.append("tripId", trip.id.toString())
-        let response = await fetch(url + "/api/mediator/await_submission?" + params, {
+        let response = await fetch(serverURL + "/api/mediator/await_submission?" + params, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -49,7 +49,7 @@
         let params: URLSearchParams = new URLSearchParams();
         params.append("riderId", window.Telegram.WebApp.initDataUnsafe.user.id.toString())
         params.append("tripId", trip.id.toString())
-        let response = await fetch(url + "/api/mediator/await_submission?" + params, {
+        let response = await fetch(serverURL + "/api/mediator/await_submission?" + params, {
             method: 'DELETE'
         });
         if (response.ok) {
@@ -60,7 +60,7 @@
     }
 
     async function rejectSubmission(trip_id: number) {
-        let response = await fetch(url + "/api/trips/" + trip_id + "/rider?riderID=" + window.Telegram.WebApp.initDataUnsafe.user.id, {
+        let response = await fetch(serverURL + "/api/trips/" + trip_id + "/rider?riderID=" + window.Telegram.WebApp.initDataUnsafe.user.id, {
             method: "DELETE",
         });
         if (response.ok) {
@@ -74,7 +74,7 @@
 <div class="centre">
     <div class="card">
         <div class="verh">
-            <img class="avatar" alt="driver-avatar" src="{url}/api/users/{trip.driver.id}/photo">
+            <img class="avatar" alt="driver-avatar" src="{serverURL}/api/users/{trip.driver.id}/photo">
             <div class="verhtext">
                 <p class="owner_name">{trip.driver.name}</p>
                 <div class="main-info">

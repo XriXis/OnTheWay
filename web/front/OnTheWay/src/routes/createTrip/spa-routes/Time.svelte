@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {url} from '../../../enviroment'
+    import {serverURL} from '../../../enviroment'
     import {tripData, step} from "../Common";
     const separate_time = tripData.departure_time.split('-');
     let timeFrom: string = separate_time[0];
@@ -37,7 +37,7 @@
 
 </script>
 
-<img src="{url}/static/images/date-range-svgrepo-com.svg" class="date-img" alt="calendar">
+<img src="{serverURL}/static/images/date-range-svgrepo-com.svg" class="date-img" alt="calendar">
 <div class="grey-rect">
     <div class="desc-img">
         <p class="dir-desc">Дата и время поездки</p>

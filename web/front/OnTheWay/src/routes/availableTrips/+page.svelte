@@ -1,7 +1,7 @@
 <script lang="ts">
     import TripCard from "$lib/TripCard.svelte";
     import type {Trip} from "$lib/Types";
-    import {url} from "../../enviroment";
+    import {serverURL} from "../../enviroment";
     import './availableTrips.css';
     import {onMount} from 'svelte';
     import DivisionHeader from "$lib/DivisionHeader.svelte";
@@ -50,11 +50,11 @@
 
 <footer class="footer">
     <button id="My-profile" on:click={()=>{window.location.href = 'profile';}}>
-        <img id="imgprof" src="{url}/static/icons/profile-1341-svgrepo-com.svg" alt="button">
+        <img id="imgprof" src="{serverURL}/static/icons/profile-1341-svgrepo-com.svg" alt="button">
         Мой <br> профиль
     </button>
     <button id="history" on:click={()=>{window.location.href = 'history';}}>
-        <img id="imghist" src="{url}/static/icons/travel-car-svgrepo-com.svg" alt="button">
+        <img id="imghist" src="{serverURL}/static/icons/travel-car-svgrepo-com.svg" alt="button">
         История <br> поездок
     </button>
 </footer>
