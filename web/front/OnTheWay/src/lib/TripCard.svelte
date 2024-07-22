@@ -124,5 +124,5 @@
             </div>
         </div>
     </div>
-    <a href="enhancedTrip.html?{trip.id}">Посмотреть подробнее</a>
+    <a href="enhancedTrip?{trip.id}">Посмотреть подробнее</a>
 </div>

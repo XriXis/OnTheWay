@@ -15,7 +15,7 @@ const hours = String(today.getHours()).padStart(2, '0');
 const minutes = String(today.getMinutes()).padStart(2, '0');
 const currentTime = `${hours}:${minutes}`;
 
-export let data: NewTrip = {
+export let tripData: NewTrip = {
     driver_id: 0,
     is_request: true,
 

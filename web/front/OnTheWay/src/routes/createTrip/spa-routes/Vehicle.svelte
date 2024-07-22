@@ -1,19 +1,19 @@
 <script lang="ts">
-    import {data, step, carType} from "../Common";
+    import {tripData, step, carType} from "../Common";
     import {url} from "../../../enviroment";
 
     $: if (carType.carType === "taxi") {
-        data.car_id = 0;
+        tripData.car_id = 0;
     } else if (carType.carType === "carsh") {
-        data.car_id = 1;
+        tripData.car_id = 1;
     } else {
-        data.car_id = undefined;
+        tripData.car_id = undefined;
     }
 
 </script>
 <img src="{url}/static/images/ruble-svgrepo-com.svg" class="date-img" alt="calendar">
 
-    {#if data.is_request === false}
+    {#if tripData.is_request === false}
         <div class="grey-rect">
         <p class="dir-desc">Вид и цена поездки</p>
         <div class="type">
@@ -44,12 +44,12 @@
 
         <div class="price">
             <p class="choose-price">Цена в рублях:</p>
-            <input type="number" id="price-rub" step="50" min="0" bind:value={data.price}>
+            <input type="number" id="price-rub" step="50" min="0" bind:value={tripData.price}>
         </div>
             <div class="av-text">
                 Свободных мест 
                 <input type="number" list="places" step="1" min="1" max="4" id="av" class="number-input" placeholder="4"
-                       bind:value={data.available_seats}/>
+                       bind:value={tripData.available_seats}/>
                 <datalist id="places">
                     <option value="1">
                     <option value="2">
@@ -64,7 +64,7 @@
         <div class="av-text">
             Сколько свободных мест нужно?
             <input type="number" list="places" step="1" min="1" max="4" id="av" class="number-input" placeholder="4"
-                   bind:value={data.available_seats}/>
+                   bind:value={tripData.available_seats}/>
             <datalist id="places">
                 <option value="1">
                 <option value="2">
@@ -81,9 +81,9 @@
     <button class="next" on:click={() => { $step-- }}>Назад</button>
     <!--        TODO: validation over vehicle choice       -->
     <button class="next" on:click={() => {
-        (!data.is_request && data.car_id!==0 && data.car_id!==1)
+        (!tripData.is_request && tripData.car_id!==0 && tripData.car_id!==1)
         ? $step++
-        : $step += 2; console.log(data)
+        : $step += 2; console.log(tripData)
     }}>Далее
     </button>
 </div>

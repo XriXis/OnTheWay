@@ -1,8 +1,8 @@
 <script lang="ts">
     import {url} from "../../../enviroment";
-    import {data, step, activeButton} from "../Common";
+    import {tripData, step, activeButton} from "../Common";
     function validate(): boolean {
-        if (data.start_location == "") {
+        if (tripData.start_location == "") {
             window.Telegram.WebApp.showAlert("Пожалуйста, выберите город отправления");
             return false;
         }
@@ -31,8 +31,8 @@
                         class="button1"
                         id="left1"
                         on:click={() => {
-              data.start_location = "Иннополис";
-              data.end_location = "Казань";
+              tripData.start_location = "Иннополис";
+              tripData.end_location = "Казань";
               $activeButton = "Иннополис";
             }}
                         style='background-color: {$activeButton === "Иннополис" ? "#969696" : ""}'
@@ -43,8 +43,8 @@
                         class="button1"
                         id="right1"
                         on:click={() => {
-              data.start_location = "Казань";
-              data.end_location = "Иннополис";
+              tripData.start_location = "Казань";
+              tripData.end_location = "Иннополис";
               $activeButton = "Казань";
             }}
                         style="background-color: {$activeButton === 'Казань' ? '#969696' : ''}"
@@ -56,7 +56,7 @@
                     id="comment1"
                     class="com"
                     placeholder="Уточните место отправления..."
-                    bind:value={data.clarify_from}
+                    bind:value={tripData.clarify_from}
             />
         {:else}
             <div class="buttons">
@@ -64,7 +64,7 @@
                         class="button1"
                         id="left1"
                         on:click={() => {}}
-                        style="background-color: {data.start_location === 'Казань' ? '#969696' : ''}"
+                        style="background-color: {tripData.start_location === 'Казань' ? '#969696' : ''}"
                 >
                     Иннополис
                 </button>
@@ -72,7 +72,7 @@
                         class="button1"
                         id="right1"
                         on:click={() => {}}
-                        style="background-color: {data.start_location === 'Иннополис' ? '#969696' : ''}"
+                        style="background-color: {tripData.start_location === 'Иннополис' ? '#969696' : ''}"
                 >
                     Казань
                 </button>
@@ -81,7 +81,7 @@
                     id="comment2"
                     class="com"
                     placeholder="Уточните место прибытия..."
-                    bind:value={data.clarify_to}
+                    bind:value={tripData.clarify_to}
             />
         {/if}
     </div>

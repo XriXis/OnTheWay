@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {ComponentType, onMount} from "svelte";
+    import {onMount} from "svelte";
     import Choice from "./spa-routes/Choice.svelte";
     import Place from "./spa-routes/Place.svelte";
     import Time from "./spa-routes/Time.svelte";
@@ -8,9 +8,11 @@
     import Cars from "./spa-routes/Cars.svelte";
     import Form from "./spa-routes/Form.svelte";
     import "./createTrip.css";
-    import {data, step} from "./Common";
+    import {tripData, step} from "./Common";
+    import {Car} from "$lib/Types";
 
-
+    export let data: { cars: Car[] }
+    const cars = data.cars;
     const order = [
         Choice,
         Place,
@@ -22,13 +24,13 @@
         Form,
     ]
 
-    onMount(()=>{
-        data.driver_id = window.Telegram.WebApp.initDataUnsafe.user.id;
+    onMount(() => {
+        window.Telegram.WebApp.expand();
     })
 </script>
 
 <div id="content-wrap">
     {#key step}
-        <svelte:component this={order[$step]} />
+        <svelte:component this={order[$step]}/>
     {/key}
 </div>

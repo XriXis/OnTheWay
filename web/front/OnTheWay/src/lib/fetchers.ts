@@ -13,8 +13,8 @@ export async function carFetcher(destination: Car[], user: User): Promise<void> 
     }
 }
 
-export async function userFetcher(): Promise<User> {
-    return await (await fetch(url + "/api/users/" + window.Telegram.WebApp.initDataUnsafe.user.id, {
+export async function userFetcher(id: number): Promise<User> {
+    return await (await fetch(url + "/api/users/" + id, {
         method: "GET",
     })).json();
 }

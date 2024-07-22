@@ -1,5 +1,5 @@
 <script>
-    import {data, step} from "../Common";
+    import {tripData, step} from "../Common";
     import {url} from "../../../enviroment"
 </script>
 
@@ -9,10 +9,10 @@
         <p class="q">совершить поездку?</p>
     </div>
     <div id="buttonschoose">
-        <button id="btnc" class="buttonchoose" on:click={()=>{ data.is_request = false; $step++; }}>
+        <button id="btnc" class="buttonchoose" on:click={()=>{ tripData.is_request = false; $step++; }}>
             Водитель
         </button>
-        <button id="btnc" class="buttonchoose" on:click={()=>{ data.is_request = true; $step++; }}>
+        <button id="btnc" class="buttonchoose" on:click={()=>{ tripData.is_request = true; $step++; }}>
             Пассажир
         </button>
     </div>

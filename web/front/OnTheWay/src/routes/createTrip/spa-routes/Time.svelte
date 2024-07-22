@@ -1,14 +1,14 @@
 <script lang="ts">
     import {url} from '../../../enviroment'
-    import {data, step} from "../Common";
-    const separate_time = data.departure_time.split('-');
+    import {tripData, step} from "../Common";
+    const separate_time = tripData.departure_time.split('-');
     let timeFrom: string = separate_time[0];
     let timeTo: string = separate_time[1];
     const currentDate = new Date();
     const currentDateString = currentDate.toISOString().split('T')[0];
     console.log(currentDateString);
     function validateDate(): boolean {
-        const selectedDate = new Date(data.departure_date);
+        const selectedDate = new Date(tripData.departure_date);
         const currentDateMidnight = new Date(currentDateString);
         currentDateMidnight.setHours(0, 0, 0, 0);
         selectedDate.setHours(0, 0, 0, 0);
@@ -44,7 +44,7 @@
     </div>
     <div class="date">
         <p class="choose-d">Дата:</p>
-        <input type="date" id="date-f" bind:value={data.departure_date} min={currentDateString}/>
+        <input type="date" id="date-f" bind:value={tripData.departure_date} min={currentDateString}/>
     </div>
     <div class="time">
         <p class="choose-t">Временной диапазон начала поездки:</p>
@@ -58,14 +58,14 @@
 </div>
 <div class="nav-buttons">
     <button class="next" on:click={()=>{
-        data.departure_time = `${timeFrom}-${timeTo}`;
+        tripData.departure_time = `${timeFrom}-${timeTo}`;
         $step--;
     }}>
         Назад
     </button>
     <button class="next" on:click={()=>{
         if (validateDate()) {
-            data.departure_time = `${timeFrom}-${timeTo}`;
+            tripData.departure_time = `${timeFrom}-${timeTo}`;
             $step++;
         }
     }}>

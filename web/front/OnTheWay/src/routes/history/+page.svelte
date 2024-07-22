@@ -15,13 +15,13 @@
             participatedTrips = await (await fetch(`${url}/api/finished/rider/${window.Telegram.WebApp.initDataUnsafe.user.id}`, {
                 method: "GET"
             })).json();
-            tripsToShow = [...ownTrips]
             let BackButton = window.Telegram.WebApp.BackButton;
             BackButton.show();
             BackButton.onClick(function () {
                 window.history.back();
                 BackButton.hide();
             });
+            tripsToShow = [...ownTrips]
         }
     );
     let tripsToShow: Trip[] = [];
