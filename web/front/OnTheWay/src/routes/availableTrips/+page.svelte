@@ -41,7 +41,7 @@
     <br>
     {#if tripsToShow && tripsToShow.length !== 0}
         {#each tripsToShow as trip}
-            <TripCard trip={trip} appliedTrips={appliedTrips}/>
+            <TripCard trip={trip} appliedTrips={appliedTrips}></TripCard>
         {/each}
     {:else}
         <p>Доступных поездок нет</p>

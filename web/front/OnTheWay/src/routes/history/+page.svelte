@@ -36,7 +36,7 @@
     <div class="scrolling" id="main-scrolling-div" style="--owner-bg-col: {name_color}">
         {#if tripsToShow && tripsToShow.length !== 0}
             {#each tripsToShow as trip}
-                <FinishedTrip trip={trip}/>
+                <FinishedTrip trip={trip}></FinishedTrip>
             {/each}
         {:else}
             <p>Вы еще не совершили ни одну поедку.</p>
