@@ -54,7 +54,7 @@
         <img id="imgprof" src="{serverURL}/static/icons/profile-1341-svgrepo-com.svg" alt="button">
         Мой <br> профиль
     </button>
-    <button id="history" on:click={()=>{window.location.href = `history?userId=${$user.id`;}}>
+    <button id="history" on:click={()=>{window.location.href = `history?userId=${$user.id}`}}>
         <img id="imghist" src="{serverURL}/static/icons/travel-car-svgrepo-com.svg" alt="button">
         История <br> поездок
     </button>
