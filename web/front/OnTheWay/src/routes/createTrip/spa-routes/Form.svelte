@@ -42,7 +42,7 @@
             body: JSON.stringify(tripData),
         }).then(async response => {
             if (response.ok) {
-                window.location.href = `createTrip/tripCreated`;
+                window.location.href = `createTrip/tripCreated?userId=${tripData.driver_id}`;
             } else {
                 window.Telegram.WebApp.showAlert("Something went wrong");
                 console.log(response)

@@ -5,6 +5,7 @@
     import './availableTrips.css';
     import {onMount} from 'svelte';
     import DivisionHeader from "$lib/DivisionHeader.svelte";
+    import {user} from "../CurrentUser";
 
     export let data: {
         trips: Trip[],
@@ -49,11 +50,11 @@
 
 
 <footer class="footer">
-    <button id="My-profile" on:click={()=>{window.location.href = 'profile';}}>
+    <button id="My-profile" on:click={()=>{window.location.href = `profile?userId=${$user.id}`;}}>
         <img id="imgprof" src="{serverURL}/static/icons/profile-1341-svgrepo-com.svg" alt="button">
         Мой <br> профиль
     </button>
-    <button id="history" on:click={()=>{window.location.href = 'history';}}>
+    <button id="history" on:click={()=>{window.location.href = `history?userId=${$user.id`;}}>
         <img id="imghist" src="{serverURL}/static/icons/travel-car-svgrepo-com.svg" alt="button">
         История <br> поездок
     </button>
