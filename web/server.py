@@ -1,10 +1,12 @@
 from contextlib import asynccontextmanager
 from pathlib import Path
 
+from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import FileResponse
 from starlette.staticfiles import StaticFiles
 from uvicorn import run
 from fastapi import FastAPI, HTTPException
+from shared.config_reader import base_webapp_url
 
 from web.routers import trips, users, cars, finished, mediator
 
@@ -36,4 +38,12 @@ def start():
     app.include_router(cars.router)
     app.include_router(finished.router)
     app.include_router(mediator.router)
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=[base_webapp_url],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
     run(app)

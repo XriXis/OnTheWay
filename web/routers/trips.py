@@ -4,8 +4,8 @@ from fastapi import APIRouter, HTTPException, Depends, Query, Response, status
 from sqlalchemy.orm import Session
 from typing import List
 
-from telegram.config_reader import config
-from web.data_models import Trip, NewTrip, UserOptions
+from shared.config_reader import config
+from web.data_models import Trip, NewTrip
 from shared.database import get_db
 from shared.base_models import Trip as SQLTrip, User as SQLUser, TripPassenger, SubmissionQueue, \
     FinishedTrip as SQLFinishedTrip, PassengersHistory
@@ -39,7 +39,7 @@ async def create_trip(new_trip: NewTrip, db: Session = Depends(get_db)):
                 [InlineKeyboardButton(
                     text="Подробнее",
                     web_app=WebAppInfo(
-                        url=f"{config.base_webapp_url.get_secret_value()}/app/editTrip.html?${sql_trip.id}"
+                        url=f"{config.base_webapp_url.get_secret_value()}/{sql_trip.id}/editTrip"
                     ))],
             ]),
             parse_mode="Markdown"

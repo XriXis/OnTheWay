@@ -9,8 +9,7 @@
     import Form from "./spa-routes/Form.svelte";
     import "./createTrip.css";
     import {tripData, step, fetchedCars} from "./Common";
-    import {Car, User} from "$lib/Types";
-    import {user} from "../../CurrentUser";
+    import {Car, User} from "../../../lib/Types";
 
     export let data: { cars: Car[], user: User }
     const order = [
@@ -29,9 +28,7 @@
     })
 
     $fetchedCars = data.cars;
-    $user = data.user;
-    tripData.driver_id = $user.id;
-
+    tripData.driver_id = data.user.id;
 </script>
 
 <div id="content-wrap">

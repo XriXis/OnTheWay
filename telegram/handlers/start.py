@@ -2,10 +2,10 @@ from aiogram import Router
 from aiogram.filters import CommandStart
 from aiogram import types
 from shared.database_class import Database
-from ..config_reader import base_webapp_url
+from shared.config_reader import base_webapp_url
 from ..form import Form
 from aiogram.fsm.context import FSMContext
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, WebAppInfo
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from telegram.bot_init import bot
 from aiogram.fsm.state import State, StatesGroup
@@ -34,11 +34,11 @@ async def start(message: types.Message, state: FSMContext):
     else:
         builder = InlineKeyboardBuilder()
         builder.row(InlineKeyboardButton(text="Создать поездку",
-                                         web_app=WebAppInfo(url=base_webapp_url + "/app/createTrip.html")),
+                                         web_app=WebAppInfo(url=base_webapp_url + f"/{message.from_user.id}/createTrip")),
                     InlineKeyboardButton(text="Найти поездку",
-                                         web_app=WebAppInfo(url=base_webapp_url + "/app/availabletrips.html")))
+                                         web_app=WebAppInfo(url=base_webapp_url + f"/{message.from_user.id}/availableTrips")))
         builder.row(InlineKeyboardButton(text="Мой профиль",
-                                         web_app=WebAppInfo(url=base_webapp_url + "/app/profile.html")))
+                                         web_app=WebAppInfo(url=base_webapp_url + f"/{message.from_user.id}/profile")))
         builder.row(InlineKeyboardButton(text="Оставить обратную связь", callback_data='feedback'))
         text = "Привет!\n\nЭто сервис по поиску попутчиков <b>on the way</b>. \
 Здесь вы можете найти с кем добраться до пункта назначения или создать поездку как водитель и найти пассажиров. \U0001F699 "
@@ -52,17 +52,18 @@ async def process_feedback_button(callback_query: types.CallbackQuery, state: FS
     await bot.send_message(callback_query.from_user.id, "Пожалуйста, оставьте ваше сообщение")
     await state.set_state(Feedback.feedback)
 
+
 @router.message(Feedback.feedback)
 async def getFeedback(message: types.Message, state: FSMContext):
     feedback = message.text
     await message.answer("Спасибо за ваше обращение! Оно будет рассмотрено в ближайшее время.")
     builder = InlineKeyboardBuilder()
     builder.row(InlineKeyboardButton(text="Создать поездку",
-                                        web_app=WebAppInfo(url=base_webapp_url + "/app/createTrip.html")),
+                                        web_app=WebAppInfo(url=base_webapp_url + f"/{message.from_user.id}/createTrip")),
                 InlineKeyboardButton(text="Найти поездку",
-                                        web_app=WebAppInfo(url=base_webapp_url + "/app/availabletrips.html")))
+                                        web_app=WebAppInfo(url=base_webapp_url + f"/{message.from_user.id}/availabletrips")))
     builder.row(InlineKeyboardButton(text="Мой профиль",
-                                        web_app=WebAppInfo(url=base_webapp_url + "/app/profile.html")))
+                                        web_app=WebAppInfo(url=base_webapp_url + f"/{message.from_user.id}/profile")))
     builder.row(InlineKeyboardButton(text="Оставить обратную связь", callback_data='feedback'))
     text = "Привет!\n\nЭто сервис по поиску попутчиков <b>on the way</b>. \
 Здесь вы можете найти с кем добраться до пункта назначения или создать поездку как водитель и найти пассажиров. \U0001F699 "

@@ -4,8 +4,8 @@ from fastapi import APIRouter, HTTPException, Depends, Query, Response, status
 from sqlalchemy.orm import Session
 
 from shared.id_generators import generator
-from telegram.config_reader import config
-from web.data_models import Trip, UserOptions
+from shared.config_reader import config
+from web.data_models import UserOptions
 from shared.database import get_db
 from shared.base_models import Trip as SQLTrip, User, SubmissionQueue
 

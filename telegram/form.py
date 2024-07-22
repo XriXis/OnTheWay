@@ -4,13 +4,12 @@ from aiogram import Router
 from aiogram import types
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove, InlineKeyboardButton, \
-    InlineKeyboardMarkup
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove, InlineKeyboardButton
 from aiogram.types.web_app_info import WebAppInfo
 
 from shared.database_class import Database
 from telegram.bot_init import bot
-from telegram.config_reader import base_webapp_url
+from shared.config_reader import base_webapp_url
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 router = Router()
@@ -113,14 +112,15 @@ async def set_photo(message: types.Message, state: FSMContext):
 
     builder = InlineKeyboardBuilder()
     builder.row(InlineKeyboardButton(text="Создать поездку",
-                                     web_app=WebAppInfo(url=base_webapp_url + "/app/createTrip.html")),
+                                     web_app=WebAppInfo(url=base_webapp_url + f"/{message.from_user.id}/createTrip")),
                 InlineKeyboardButton(text="Найти поездку",
-                                     web_app=WebAppInfo(url=base_webapp_url + "/app/availabletrips.html")))
+                                     web_app=WebAppInfo(url=base_webapp_url + f"/{message.from_user.id}/availableTrips")))
     builder.row(InlineKeyboardButton(text="Мой профиль",
-                                     web_app=WebAppInfo(url=base_webapp_url + "/app/profile.html")))
+                                     web_app=WebAppInfo(url=base_webapp_url + f"/{message.from_user.id}/profile")))
     await message.answer("Отлично!\U0001f973 Анкета создана, можете начать ваше чудесное путешествие\U0001f699",
                          reply_markup=builder.as_markup())
     await state.set_state(Form.cycle)
+
 
 @router.message(Form.cycle)
 async def accept_meta_transferring(message: types.Message, state: FSMContext):
