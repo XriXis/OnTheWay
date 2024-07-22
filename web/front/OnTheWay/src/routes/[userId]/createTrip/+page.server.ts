@@ -1,5 +1,5 @@
 import type {Load} from '@sveltejs/kit';
-import {Car} from "../../../lib/Types";
+import type {Car} from "../../../lib/Types";
 import {carFetcher, userFetcher} from "../../../lib/fetchers";
 
 export const load: Load = async ({params}) => {

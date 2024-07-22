@@ -9,7 +9,7 @@
     import Form from "./spa-routes/Form.svelte";
     import "./createTrip.css";
     import {tripData, step, fetchedCars} from "./Common";
-    import {Car, User} from "../../../lib/Types";
+    import type {Car, User} from "../../../lib/Types";
 
     export let data: { cars: Car[], user: User }
     const order = [

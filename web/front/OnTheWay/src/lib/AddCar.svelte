@@ -1,6 +1,6 @@
 <script lang="ts">
     import Modal from "$lib/modal/Modal.svelte";
-    import {Car, NewCar} from "$lib/Types";
+    import type {Car, NewCar} from "$lib/Types";
     import {onMount} from "svelte";
     import {serverURL} from '../enviroment'
     import './assets/AddCar.css'

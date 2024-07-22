@@ -2,9 +2,12 @@
     import {serverURL} from "../../../../enviroment";
     import AddCar from "$lib/AddCar.svelte";
     import {tripData, step, fetchedCars} from "../Common";
-    import {Car} from "$lib/Types";
+    import type {Car} from "$lib/Types";
 
-    let cars: Car[] = [...$fetchedCars];
+    let cars: Car[] = [];
+    $: if ($fetchedCars && $fetchedCars.length > 0){
+        cars = [...$fetchedCars];
+    }
 
     let currentCar: number;
 
